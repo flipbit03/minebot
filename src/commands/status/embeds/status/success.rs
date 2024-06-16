@@ -1,22 +1,24 @@
-use std::env;
-
 use async_minecraft_ping::StatusResponse;
 use serenity::{all::CreateEmbed, model::colour};
 
-pub fn generate(status: StatusResponse) -> CreateEmbed {
+use crate::config::MinebotMinecraftServerConfig;
+
+pub fn create_success_embed(
+    status: StatusResponse,
+    mc: &MinebotMinecraftServerConfig,
+) -> CreateEmbed {
     let players = match status.players.sample {
         Some(players) => players
             .iter()
             .map(|player| {
-                let name = player.name.clone();
-                name
+                player.name.clone()
             })
             .collect::<Vec<String>>()
             .join("\n"),
         None => String::from("No players online"),
     };
 
-    let embed = CreateEmbed::new()
+    CreateEmbed::new()
         .title("Server Status")
         .fields(vec![
             ("Status", "Online", true),
@@ -28,17 +30,10 @@ pub fn generate(status: StatusResponse) -> CreateEmbed {
             ("Players", players.as_str(), false),
             (
                 "Server IP",
-                format!(
-                    "{}:{}",
-                    env::var("SERVER_IP").unwrap(),
-                    env::var("SERVER_PORT").unwrap()
-                )
-                .as_str(),
+                format!("{}:{}", mc.address, mc.port).as_str(),
                 true,
             ),
             ("Version", status.version.name.as_str(), true),
         ])
-        .color(colour::Colour::from_rgb(0, 255, 100));
-
-    embed
+        .color(colour::Colour::from_rgb(0, 255, 100))
 }
