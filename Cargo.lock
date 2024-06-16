@@ -1040,6 +1040,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "minebot"
+version = "0.1.0"
+dependencies = [
+ "async-minecraft-ping",
+ "config",
+ "dotenv",
+ "env_logger",
+ "log",
+ "poise",
+ "serde",
+ "serenity",
+ "tokio",
+]
+
+[[package]]
 name = "mini-moka"
 version = "0.10.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1627,21 +1642,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8f92a496fb766b417c996b9c5e57daf2f7ad3b0bebe1ccfca4856390e3d3bb67"
 dependencies = [
  "autocfg",
-]
-
-[[package]]
-name = "slp_bot"
-version = "0.1.0"
-dependencies = [
- "async-minecraft-ping",
- "config",
- "dotenv",
- "env_logger",
- "log",
- "poise",
- "serde",
- "serenity",
- "tokio",
 ]
 
 [[package]]

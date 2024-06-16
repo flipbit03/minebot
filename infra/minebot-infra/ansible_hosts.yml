@@ -1,0 +1,6 @@
+cadu_servers:
+  hosts:
+    minebot:
+      ansible_host: 104.237.149.192
+      ansible_user: root
+

@@ -1,0 +1,72 @@
+---
+- name: Configure Minebot Server
+  hosts: minebot
+
+  roles:
+    - geerlingguy.docker
+
+  tasks:
+    # Set the machine hostname to MINEBOT
+    - name: Set hostname
+      ansible.builtin.hostname:
+        name: MINEBOT
+
+    # Install `mc`, `vim-nox`, `byobu`, `git`
+    - name: Install packages
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop:
+        - mc
+        - vim-nox
+        - byobu
+        - git
+
+    # Create Minebot user
+    - name: Create the minebot user
+      ansible.builtin.user:
+        name: minebot
+        state: present
+        shell: /bin/bash
+      register: created_user
+
+    # Make minebot a member of the `docker` group
+    - name: Add minebot to the docker group
+      ansible.builtin.user:
+        name: minebot
+        groups: docker
+        append: yes
+
+    # Ovó cria a pasta
+    - name: Create the .ssh directory
+      become: yes
+      become_user: minebot
+      ansible.builtin.file:
+        path: "{{ created_user.home }}/.ssh"
+        state: directory
+        mode: '0755'
+
+    - name: Generate an OpenSSH keypair with the default values (4096 bits, rsa)
+      become: yes
+      become_user: minebot
+      community.crypto.openssh_keypair:
+        path: "{{ created_user.home }}/.ssh/deploy_key"
+        comment: "minebot@minebot_deploy_key"
+      register: created_deploy_key
+
+    - name: Add deploy_key.pub to the authorized_keys file
+      become: yes
+      become_user: minebot
+      ansible.posix.authorized_key:
+        key: "{{ created_deploy_key.public_key }}"
+        state: present
+        user: minebot
+
+    - name: Add Cadu key to minebot's authorized_keys file
+      become: yes
+      become_user: minebot
+      ansible.posix.authorized_key:
+        key: "{{ lookup('file', '/home/cadu/.ssh/id_rsa.pub') }}"
+        state: present
+        user: minebot

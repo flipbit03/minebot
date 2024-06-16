@@ -10,9 +10,7 @@ pub fn create_success_embed(
     let players = match status.players.sample {
         Some(players) => players
             .iter()
-            .map(|player| {
-                player.name.clone()
-            })
+            .map(|player| player.name.clone())
             .collect::<Vec<String>>()
             .join("\n"),
         None => String::from("No players online"),

@@ -1,0 +1,11 @@
+services:
+  minebot:
+    image: ghcr.io/flipbit03/minebot:${MINEBOT__IMAGE_TAG:-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - RUST_LOG=info
+    env_file:
+      - .env
+    restart: unless-stopped
