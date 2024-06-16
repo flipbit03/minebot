@@ -1,6 +1,6 @@
 services:
   minebot:
-    image: ghcr.io/flipbit03/minebot:${MINEBOT__IMAGE_TAG:-latest}
+    image: ghcr.io/flipbit03/minebot:${MINEBOT__IMAGE_TAG:-main}
     build:
       context: .
       dockerfile: Dockerfile
