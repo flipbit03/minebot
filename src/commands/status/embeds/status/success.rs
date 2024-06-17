@@ -12,7 +12,8 @@ pub fn create_success_embed(
             .iter()
             .map(|player| player.name.clone())
             .collect::<Vec<String>>()
-            .join("\n"),
+            .join("\n")
+            .replace("_", "\\_"),
         None => String::from("No players online"),
     };
 
