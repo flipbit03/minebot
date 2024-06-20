@@ -98,13 +98,13 @@ jobs:
       - deploy
     runs-on: ubuntu-latest
     steps:
-        - name: Discord Webhook Action
-          uses: tsickert/discord-webhook@v5.3.0
-          with:
-            webhook-url: ${{ secrets.MINEBOT__WEBHOOK__URL }}
-            embed-title: "Minebot"
-            embed-color: 4771125
-            embed-description: "Uma nova versão do bot foi deployada e já está disponível para uso!"
-            username: "Minebot"
-          
+      - name: Discord Webhook Action
+        uses: tsickert/discord-webhook@v5.3.0
+        with:
+          webhook-url: ${{ secrets.MINEBOT__WEBHOOK__URL }}
+          embed-title: "Minebot"
+          embed-color: 4771125
+          embed-description: "Uma nova versão do bot foi deployada e já está disponível para uso!"
+          username: "Minebot"
+        
             

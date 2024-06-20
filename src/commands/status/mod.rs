@@ -1,8 +1,8 @@
 use log::info;
 use poise::CreateReply;
 
-use crate::commands::status::embeds::status::error::create_failure_embed;
-use crate::commands::status::embeds::status::success::create_success_embed;
+use crate::commands::status::embeds::error::create_failure_embed;
+use crate::commands::status::embeds::success::create_success_embed;
 use crate::types::{MinebotError, MinebotPoiseContext};
 
 mod embeds;
