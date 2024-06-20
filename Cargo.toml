@@ -10,9 +10,9 @@ dotenv = "0.15.0"
 serenity = "0.12"
 tokio = { version = "1.21.2", features = ["macros", "rt-multi-thread"] }
 async-minecraft-ping = "0.8.0"
-#config = "0.14.0"
 config = { version = "0.14.0", default-features = false, features = [] }
 serde = "1.0.203"
 poise = "0.6.1"
 env_logger = "0.11.3"
 log = "0.4.21"
+axum = "0.7.5"
