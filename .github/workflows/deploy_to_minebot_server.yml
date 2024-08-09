@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - 'main'
+  workflow_dispatch:
+
 
 env:
   # Variables for "build-and-push-image" job
