@@ -1,1 +1,2 @@
-pub mod status;
+pub mod error;
+pub mod success;
